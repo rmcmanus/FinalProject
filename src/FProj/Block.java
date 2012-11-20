@@ -2,12 +2,25 @@ package FProj;
 
 import java.awt.Color;
 
-public class Block {
+public abstract class Block {
 	private Color color;
-	private int width, heigth;
+	public final static int CELLSIZE = 25;
+	private int row, col, index;
 	
-	public void collide() {
-		
+	public Boolean isCastleBlock() {
+		return false;
 	}
-
+	public Boolean isLauncherBlock() {
+		return false;
+	}
+	public Boolean isCloudBlock() {
+		return false;
+	}
+	public Boolean isGrassBlock() {
+		return false;
+	}
+	public Boolean isAirBlock() {
+		return false;
+	}
+	
 }
