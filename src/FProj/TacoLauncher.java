@@ -15,7 +15,14 @@ public class TacoLauncher extends Block{
 	}
 	
 	public Projectile throwProjectile() {
-		return null;
+		//calc initial dy
+		double dy = 0;
+		dy = (Math.sin(angle) * velocity);
+		//calc initial dx
+		double dx = 0;
+		dx = (Math.cos(angle) * velocity);
+		
+		return new Projectile(dx, dy);
 	}
 	
 	public void changeLauncher(double angle, double velocity) {

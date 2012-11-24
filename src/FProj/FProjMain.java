@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class FProjMain {
 
 	ArrayList<Block> blocks = new ArrayList<Block>();
+	Projectile projectile;
 	
 	public FProjMain() {
 		loadMapFromFile();
