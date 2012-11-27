@@ -2,9 +2,9 @@ package FProj;
 
 import java.awt.Graphics;
 
-public class Grass {
+public class Grass extends Block{
 
-	public Boolean isGrassBlockl() {
+	public Boolean isGrassBlock() {
 		return true;
 	}
 	

@@ -38,8 +38,6 @@ public class TacoLauncherTest {
 	public void testTacoLauncherLocation() {
 		//Test launcher location
 		Assert.assertTrue(main.getBlocks().get(366).isLauncherBlock());
-		Assert.assertTrue(main.getBlocks().get(392).isLauncherBlock());
-		Assert.assertTrue(main.getBlocks().get(418).isLauncherBlock());
 	}
 	
 	@Test

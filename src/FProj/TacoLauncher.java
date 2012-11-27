@@ -26,8 +26,8 @@ public class TacoLauncher extends Block{
 	}
 	
 	public void changeLauncher(double angle, double velocity) {
-		//this.angle = angle;
-		//this.veloctiy = velocity;
+		this.angle = angle;
+		this.velocity = velocity;
 	}
 	
 	public void draw(Graphics g) {
