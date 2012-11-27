@@ -8,6 +8,7 @@ public abstract class Block {
 	Integer row, col, index;
 	Character charName;
 	
+	
 	public Boolean isCastleBlock() {
 		return false;
 	}
