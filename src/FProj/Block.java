@@ -5,7 +5,9 @@ import java.awt.Color;
 public abstract class Block {
 	private Color color;
 	public final static int CELLSIZE = 25;
-	private int row, col, index;
+	Integer row, col, index;
+	Character charName;
+	
 	
 	public Boolean isCastleBlock() {
 		return false;
@@ -22,5 +24,15 @@ public abstract class Block {
 	public Boolean isAirBlock() {
 		return false;
 	}
+	
+	////////
+	public Integer getRow() {
+		return row;
+	}
+	public Integer getCol() {
+		return col;
+	}
+	
+	
 	
 }

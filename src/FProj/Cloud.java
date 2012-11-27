@@ -4,7 +4,7 @@ import java.awt.Graphics;
 
 public class Cloud extends Block{
 	
-	public Boolean isCloudBlockl() {
+	public Boolean isCloudBlock() {
 		return true;
 	}
 	
