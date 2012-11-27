@@ -1,0 +1,5 @@
+W, air
+C, cloud
+B, castle
+T, launcher
+G, grass
