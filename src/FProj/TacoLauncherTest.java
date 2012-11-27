@@ -85,19 +85,23 @@ public class TacoLauncherTest {
 		Assert.assertTrue((10 + 5 * Math.cos(30) + testProjectile1.getDx()*3- testProjectile1.getX())<.000001);
 		Assert.assertTrue((10 + 5 * Math.cos(30) + testProjectile1.getDy()*3- testProjectile1.getY())<.000001);
 		
-		//Test landing
-		testProjectile1.setTimer(true);
-		while(testProjectile1.getY()>0){
-			//Wait while projectile is falling
-			System.out.println("waiting...");
-		}
-		Assert.assertTrue(testProjectile1.isLanded());
 		
 		tacoLauncher.changeLauncher(45, 5);
 		Projectile testProjectile2 = tacoLauncher.throwProjectile();
 		//Test initial location of projectile with angle = 45
 		Assert.assertEquals((10 + 5 * Math.cos(45)), testProjectile2.getX());
 		Assert.assertEquals(10 + 5 * Math.sin(45), testProjectile2.getY());
+		
+
+		//Test landing
+		System.out.println("Got here " + testProjectile2.getY());
+		while(testProjectile2.getY()>0){
+			//Wait while projectile is falling
+			testProjectile2.setTimer(true);
+			System.out.println("waiting...");
+		}
+		System.out.println("Landed " + testProjectile2.getY());
+		Assert.assertTrue(testProjectile2.isLanded());
 		
 	}
 
