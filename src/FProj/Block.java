@@ -7,6 +7,7 @@ public abstract class Block {
 	public final static int CELLSIZE = 25;
 	private int row, col, index;
 	
+	
 	public Boolean isCastleBlock() {
 		return false;
 	}
