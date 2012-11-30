@@ -1,5 +1,6 @@
 package FProj;
 
+import java.awt.Graphics;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -7,7 +8,9 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
-public class FProjMain {
+import javax.swing.JPanel;
+
+public class FProjMain extends JPanel {
 
 	ArrayList<Block> blocks = new ArrayList<Block>();
 	Map<Character, String> legend = new TreeMap<Character, String>();
@@ -108,12 +111,19 @@ public class FProjMain {
 	}
 
 	
-	public static void main(String[] args) {
-		FProjMain newProj = new FProjMain();
-		System.out.println("Size of blocks array: " + newProj.blocks.size());
-		for(Block block : newProj.blocks)
-			System.out.println("Block name: " + newProj.legend.get(block.charName) + " --- " + "Column: " + block.getCol() + " Row: " + block.getRow());
-
+//	public static void main(String[] args) {
+//		FProjMain newProj = new FProjMain();
+//		System.out.println("Size of blocks array: " + newProj.blocks.size());
+//		for(Block block : newProj.blocks)
+//			System.out.println("Block name: " + newProj.legend.get(block.charName) + " --- " + "Column: " + block.getCol() + " Row: " + block.getRow());
+//
+//	}
+	
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		for(Block blo : blocks) {
+			blo.draw(g);
+		}
 	}
 
 }
