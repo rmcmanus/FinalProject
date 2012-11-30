@@ -1,6 +1,7 @@
 package FProj;
 
 import java.awt.Color;
+import java.awt.Graphics;
 
 public abstract class Block {
 	private Color color;
@@ -8,6 +9,9 @@ public abstract class Block {
 	Integer row, col, index;
 	Character charName;
 	
+	public void draw(Graphics g)  {
+		
+	}
 	
 	public Boolean isCastleBlock() {
 		return false;
