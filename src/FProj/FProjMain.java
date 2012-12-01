@@ -31,13 +31,12 @@ public class FProjMain extends JPanel {
 	}
 	
 	public int getIndex(int x, int y){
-		
-		return 0;
+		return y*numCols + x;
 	}
 	
 	public void loadMapFromFile() {
 		try {
-			FileReader inputReader = new FileReader("config.txt");
+			FileReader inputReader = new FileReader("configNew.csv");
 			Scanner in = new Scanner(inputReader);
 			String delimiter = ",";
 
@@ -86,7 +85,6 @@ public class FProjMain extends JPanel {
 				numRows++;
 			}
 			in.close();
-			System.out.println("NumCols: " + numCols);
 		} catch (FileNotFoundException e) {
 			System.out.println("config.txt cannot be found. Please add config.txt to the list and try again.");
 		}
@@ -136,6 +134,15 @@ public class FProjMain extends JPanel {
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		
+		// how to break castle
+		System.out.println(blocks.get(366).isCastleBlock());
+		Block temp = new Air();
+		temp.col = 25;
+		temp.row = 11;
+		//temp.charName = 'G';
+		blocks.set(366, temp);
+		/////////////////
 		for(Block blo : blocks) {
 			blo.draw(g);
 		}
