@@ -13,14 +13,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class LauncherPanel extends JPanel{
-	private JTextField velocity, angle;
+	private JTextField velocity, angle, messageField;
 	private JButton launch;
 	public LauncherPanel() {
 		setLayout(new BorderLayout());
-		add(labels(), BorderLayout.NORTH);
+		messageField = new JTextField(20);
+		messageField.setText("Want to know how fast you're going?");
+		add(messageField, BorderLayout.NORTH);
+		add(labels(), BorderLayout.CENTER);
 		launch = new JButton("Launch!");
 		launch.addActionListener(new LaunchListener());
-		add(launch, BorderLayout.CENTER);
+		add(launch, BorderLayout.SOUTH);
 	}
 	
 	public JPanel labels() {
@@ -43,6 +46,11 @@ public class LauncherPanel extends JPanel{
 		angle.setFont(new Font("SnasSerif", Font.BOLD, 12));
 		angle.addFocusListener(new AngleListener());
 		panel.add(angle);
+		
+		JButton setButton = new JButton("Calculate Trajectory");
+		panel.add(setButton);
+		
+		
 		
 		return panel;
 	}
@@ -69,11 +77,25 @@ public class LauncherPanel extends JPanel{
 		}
 	}
 	
+	public class ChangeListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			FProjMain.getMain().repaint();
+		}
+	}
+	
 	public class LaunchListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
 			//System.out.println("Button Works");
 			//Launch!
+			if(Double.parseDouble(velocity.getText()) < 5) {
+				messageField.setText("SLOW");
+			}
+			else {
+				messageField.setText("SLOW THE HECK DOWN");
+			}
 			FProjMain.getMain().fly();
 		}
 	}

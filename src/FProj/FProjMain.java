@@ -1,5 +1,6 @@
 package FProj;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -194,7 +195,19 @@ public class FProjMain extends JPanel {
 		for(Block blo : blocks) {
 			blo.draw(g);
 		}
+		if(!timer.isRunning()) {
+			drawTrajectory(g);
+		}
 		projectile.draw(g);
+	}
+
+	public void drawTrajectory(Graphics g) {
+		for(int i = 0; i < 5; i++) {
+			projectile.calcTrajectory();
+			g.setColor(Color.WHITE);
+			g.fillOval(projectile.trajX, projectile.trajY, Block.CELLSIZE, Block.CELLSIZE);
+		}
+		
 	}
 
 }
