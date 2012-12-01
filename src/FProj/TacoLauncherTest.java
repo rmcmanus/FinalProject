@@ -58,13 +58,13 @@ public class TacoLauncherTest {
 	
 	@Test
 	public void testLauncherChange() {
-		tacoLauncher.changeLauncher(25, 12);
+		//tacoLauncher.changeLauncher(25, 12);
 		//Test that changeLauncher changed angle
 		Assert.assertEquals(25.0, tacoLauncher.getAngle());
 		//Test that changeLauncher changed velocity
 		Assert.assertEquals(12.0, tacoLauncher.getVelocity());
 		
-		tacoLauncher.changeLauncher(90, 5);
+		//tacoLauncher.changeLauncher(90, 5);
 		//Test that changeLauncher changed angle
 		Assert.assertEquals(90.0, tacoLauncher.getAngle());
 		//Test that changeLauncher changed velocity
@@ -73,7 +73,7 @@ public class TacoLauncherTest {
 	
 	@Test
 	public void testLaunch() {
-		tacoLauncher.changeLauncher(30, 5);
+		//tacoLauncher.changeLauncher(30, 5);
 		Projectile testProjectile1 = tacoLauncher.throwProjectile();
 		
 		//Test inital location of projectile with angle = 30
@@ -81,7 +81,7 @@ public class TacoLauncherTest {
 		Assert.assertEquals((int) (10) , testProjectile1.getY());
 		
 
-		tacoLauncher.changeLauncher(45, 5);
+		//tacoLauncher.changeLauncher(45, 5);
 		Projectile testProjectile2 = tacoLauncher.throwProjectile();
 		//Test initial location of projectile with angle = 45
 		Assert.assertEquals((int) (10), testProjectile2.getX());

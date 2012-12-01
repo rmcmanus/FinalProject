@@ -30,6 +30,7 @@ public class LauncherPanel extends JPanel{
 		panel.add(velocityLabel);
 		
 		velocity = new JTextField(5);
+		velocity.setText("0");
 		velocity.setFont(new Font("SnasSerif", Font.BOLD, 12));
 		velocity.addFocusListener(new VelocityListener());
 		panel.add(velocity);
@@ -38,6 +39,7 @@ public class LauncherPanel extends JPanel{
 		panel.add(angleLabel);
 		
 		angle = new JTextField(5);
+		angle.setText("0");
 		angle.setFont(new Font("SnasSerif", Font.BOLD, 12));
 		angle.addFocusListener(new AngleListener());
 		panel.add(angle);
@@ -50,8 +52,9 @@ public class LauncherPanel extends JPanel{
 		public void focusGained(FocusEvent e) {}
 		// When we lose focus, need to update the display
 		public void focusLost(FocusEvent e) {
-			System.out.println("Velocity works");
+			//System.out.println("Velocity works");
 			//set velocity
+			TacoLauncher.getLauncher().changeVelocity(Double.parseDouble(velocity.getText()));
 		}
 	}
 	
@@ -60,16 +63,18 @@ public class LauncherPanel extends JPanel{
 		public void focusGained(FocusEvent e) {}
 		// When we lose focus, need to update the display
 		public void focusLost(FocusEvent e) {
-			System.out.println("Angle works");
+			//System.out.println("Angle works");
 			//set angle
+			TacoLauncher.getLauncher().changeAngle(Double.parseDouble(angle.getText()));
 		}
 	}
 	
 	public class LaunchListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("Button Works");
+			//System.out.println("Button Works");
 			//Launch!
+			FProjMain.getMain().fly();
 		}
 	}
 	

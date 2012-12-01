@@ -20,26 +20,54 @@ public class FProjMain extends JPanel {
 	Projectile projectile;
 	TacoLauncher launcher;
 	int numRows = 0, numCols=0;
+	public static FProjMain globalMain;
 
-	Timer timer = new Timer(100, (new ActionListener() {
+	Timer timer = new Timer(30, (new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			projectile.calcStep();
+			collide(projectile);
 			repaint();
+			if(projectile.getY() >= (numRows - 2) * Block.CELLSIZE) {
+				timer.stop();
+				/*projectile = new Projectile(0, 0, 0);
+				try {
+					Thread.sleep(200);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}*/
+			}
 		}
 	}
 	));
 	
 	public FProjMain() {
 		loadLegend();
-		loadMapFromFile();
+		loadMapFromFile();/*yes!*/
+		globalMain = this;
+	}
+	
+	public static FProjMain getMain() {
+		return globalMain;
 	}
 
 	public void collide(Projectile p){
 		int x = p.getX()/25;
 		int y = p.getY()/25;
-		if(blocks.get(getIndex(x,y)).isCastleBlock()){
-
+		if(y > 0) {
+			if(blocks.get(getIndex(x,y)).isCastleBlock()){
+				Block temp = new Air();
+				temp.col = x;
+				temp.row = y;
+				int tempIndex = getIndex(x, y);
+				blocks.set(tempIndex, temp);
+				timer.stop();
+				//Readjust projectile back to launcher
+			}
+		}
+		else {
+			
 		}
 	}
 
@@ -58,7 +86,6 @@ public class FProjMain extends JPanel {
 				String[] temp = line.split(delimiter);
 				numCols = temp.length;
 				for(int i = 0; i < temp.length; i++) {
-					System.out.println(temp[i]);
 					if(temp[i].equals("C")) {
 						Cloud newCloud = new Cloud();
 						newCloud.col = i;
@@ -141,13 +168,8 @@ public class FProjMain extends JPanel {
 	}
 
 	public void fly() {
-		launcher.changeLauncher(12, 12);
 		projectile = launcher.throwProjectile();
 		timer.start();
-		if(projectile.getY() <= 0){
-			projectile.landed = true;
-			timer.stop();
-		}
 	}
 
 	//	public static void main(String[] args) {

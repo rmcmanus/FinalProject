@@ -18,6 +18,7 @@ public class Projectile {
 	public static int initialY;
 	//private int cannonLength=5;
 	boolean landed;
+	public static Projectile globalProjectile;
 
 	public Projectile(double dx, double dy, double angle) {
 		this.dx = dx;
@@ -27,10 +28,14 @@ public class Projectile {
 		
 		this.x = (int) (initialX);
 		this.y = (int) (initialY);
+		
+		globalProjectile = this;
 	}
 	
-	public enum Taco {TACO, CHULUPA, DORITOSLOCOS, CANTINABOWL, STEAKQUESADILLA};
-	private Taco projectileType;
+	//public enum Taco {TACO};
+	public static Projectile getProj() {
+		return globalProjectile;
+	}
 	
 	public void draw(Graphics g) {
 		g.setColor(Color.RED);
@@ -41,7 +46,7 @@ public class Projectile {
 	public void calcStep() {
 		x += dx;
 		y += dy;
-		dy -= 1;
+		dy += 1;
 	}
 	
 	

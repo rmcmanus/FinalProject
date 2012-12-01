@@ -8,28 +8,36 @@ public class TacoLauncher extends Block{
 	double velocity = 0;
 	double dy;
 	double dx;
+	public static TacoLauncher globalLauncher;
 	
 	public TacoLauncher() {
-		
+		globalLauncher = this;
 	}
 	
 	public Boolean isLauncherBlock() {
 		return true;
 	}
 	
+	public static TacoLauncher getLauncher() {
+		return globalLauncher;
+	}
+	
 	public Projectile throwProjectile() {
 		//calc initial dy
 		dy = 0;
-		dy = (Math.sin(angle) * velocity);
+		dy = (Math.sin(Math.toRadians(-1 * angle)) * velocity);
 		//calc initial dx
 		dx = 0;
-		dx = (Math.cos(angle) * velocity);
+		dx = (Math.cos(Math.toRadians(-1 * angle)) * velocity);
 		
-		return new Projectile(dx, dy, angle);
+		return new Projectile(dx, dy, -1 * angle);
 	}
 	
-	public void changeLauncher(double angle, double velocity) {
+	public void changeAngle(double angle) {
 		this.angle = angle;
+	}
+	
+	public void changeVelocity(double velocity) {
 		this.velocity = velocity;
 	}
 	
