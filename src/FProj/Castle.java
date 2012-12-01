@@ -19,7 +19,7 @@ public class Castle extends Block{
 		g.setColor(Color.GRAY);
 		g.fillRect(this.col * CELLSIZE, this.row * CELLSIZE, CELLSIZE, CELLSIZE);
 		g.setColor(Color.BLACK);
-		g.drawRect(this.col * CELLSIZE, this.row * CELLSIZE, CELLSIZE, CELLSIZE);
+		g.drawRect(this.col * CELLSIZE, this.row * CELLSIZE, CELLSIZE - 1, CELLSIZE);
 	}
 	
 	public ArrayList<Block> getBlocks() {

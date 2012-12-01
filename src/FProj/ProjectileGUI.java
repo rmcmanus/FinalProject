@@ -1,3 +1,5 @@
+package FProj;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +15,8 @@ public class ProjectileGUI extends JFrame{
 	public ProjectileGUI() {
 		//add FProjMain panel
 		
+		FProjMain main = new FProjMain();
+		add(main, BorderLayout.CENTER);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);

@@ -1,5 +1,6 @@
 package FProj;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class TacoLauncher extends Block{
@@ -33,7 +34,8 @@ public class TacoLauncher extends Block{
 	}
 	
 	public void draw(Graphics g) {
-
+		g.setColor(Color.BLACK);
+		g.fillRect(this.col * CELLSIZE, this.row * CELLSIZE, CELLSIZE, CELLSIZE);
 	}
 	
 //////////////////////////////////////////////////////////////////

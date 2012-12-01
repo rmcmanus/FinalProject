@@ -8,14 +8,14 @@ import java.util.TimerTask;
 import javax.swing.Timer;
 
 public class Projectile {
-	private double x = 0;
-	private double y = 0;
+	private int x = 0;
+	private int y = 0;
 	private double dx;
 	private double dy;
 	private double angle;
 	private int initialX=10;
 	private int initialY=10;
-	private int cannonLength=5;
+	//private int cannonLength=5;
 	boolean landed;
 	Timer timer;
 	
@@ -28,8 +28,8 @@ public class Projectile {
 		
 		this.angle = angle;
 		
-		this.x = initialX + Math.cos(angle) * cannonLength;
-		this.y = initialY + Math.sin(angle) * cannonLength;
+		this.x = (int) (initialX);
+		this.y = (int) (initialY);
 		
 		timer = new Timer(100, (new ActionListener() {
 			@Override
@@ -79,7 +79,7 @@ public class Projectile {
 		return landed;
 	}
 	
-	public double getX() {
+	public int getX() {
 		return this.x;
 	}
 	
@@ -87,7 +87,7 @@ public class Projectile {
 		this.x = x;
 	}
 	
-	public double getY() {
+	public int getY() {
 		return this.y;
 	}
 	

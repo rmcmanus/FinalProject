@@ -10,7 +10,7 @@ public class Air extends Block{
 	}
 
 	public void draw(Graphics g) {
-		g.setColor(Color.PINK);
+		g.setColor( new Color(0x99, 0xcc, 0xff) );
 		g.fillRect(this.col * CELLSIZE, this.row * CELLSIZE, CELLSIZE, CELLSIZE);
 		
 	}
