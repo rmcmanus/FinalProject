@@ -15,13 +15,26 @@ public class FProjMain extends JPanel {
 	ArrayList<Block> blocks = new ArrayList<Block>();
 	Map<Character, String> legend = new TreeMap<Character, String>();
 	Projectile projectile;
-	int numRows = 0;
+	int numRows = 0, numCols=0;
 
 	public FProjMain() {
 		loadLegend();
 		loadMapFromFile();
 	}
 
+	public void collide(Projectile p){
+		int x = p.getX()/25;
+		int y = p.getY()/25;
+		if(blocks.get(getIndex(x,y)).isCastleBlock()){
+			
+		}
+	}
+	
+	public int getIndex(int x, int y){
+		
+		return 0;
+	}
+	
 	public void loadMapFromFile() {
 		try {
 			FileReader inputReader = new FileReader("config.txt");
@@ -31,6 +44,7 @@ public class FProjMain extends JPanel {
 			while(in.hasNextLine()) {
 				String line = in.nextLine();
 				String[] temp = line.split(delimiter);
+				numCols = temp.length;
 				for(int i = 0; i < temp.length; i++) {
 					System.out.println(temp[i]);
 					if(temp[i].equals("C")) {
@@ -72,6 +86,7 @@ public class FProjMain extends JPanel {
 				numRows++;
 			}
 			in.close();
+			System.out.println("NumCols: " + numCols);
 		} catch (FileNotFoundException e) {
 			System.out.println("config.txt cannot be found. Please add config.txt to the list and try again.");
 		}
