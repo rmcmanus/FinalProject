@@ -18,11 +18,14 @@ public class ProjectileGUI extends JFrame{
 		FProjMain main = new FProjMain();
 		add(main, BorderLayout.CENTER);
 		
+		LauncherPanel launcher = new LauncherPanel();
+		add(launcher, BorderLayout.SOUTH);
+		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		menuBar.add(createFileMenu());
 		
-		setSize(new Dimension(800, 800));
+		setSize(new Dimension(800, 600));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Projectile Game");
 	}
@@ -49,4 +52,5 @@ public class ProjectileGUI extends JFrame{
 		ProjectileGUI projectileGame = new ProjectileGUI();
 		projectileGame.setVisible(true);
 	}
+	
 }
