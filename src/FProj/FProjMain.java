@@ -1,6 +1,8 @@
 package FProj;
 
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -9,14 +11,25 @@ import java.util.Scanner;
 import java.util.TreeMap;
 
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class FProjMain extends JPanel {
 
 	ArrayList<Block> blocks = new ArrayList<Block>();
 	Map<Character, String> legend = new TreeMap<Character, String>();
 	Projectile projectile;
+	TacoLauncher launcher;
 	int numRows = 0, numCols=0;
 
+	Timer timer = new Timer(100, (new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			projectile.calcStep();
+			repaint();
+		}
+	}
+	));
+	
 	public FProjMain() {
 		loadLegend();
 		loadMapFromFile();
@@ -26,14 +39,14 @@ public class FProjMain extends JPanel {
 		int x = p.getX()/25;
 		int y = p.getY()/25;
 		if(blocks.get(getIndex(x,y)).isCastleBlock()){
-			
+
 		}
 	}
-	
+
 	public int getIndex(int x, int y){
 		return y*numCols + x;
 	}
-	
+
 	public void loadMapFromFile() {
 		try {
 			FileReader inputReader = new FileReader("configNew.csv");
@@ -61,11 +74,15 @@ public class FProjMain extends JPanel {
 						blocks.add(newCastle);
 					}
 					if(temp[i].equals("T")) {
-						TacoLauncher newLauncher = new TacoLauncher();
-						newLauncher.col = i;
-						newLauncher.row = numRows;
-						newLauncher.charName = temp[i].charAt(0);
-						blocks.add(newLauncher);
+						launcher = new TacoLauncher();
+						launcher.col = i;
+						launcher.row = numRows;
+						launcher.charName = temp[i].charAt(0);
+						blocks.add(launcher);
+						Projectile.initialX = i * Block.CELLSIZE;
+						Projectile.initialY = numRows * Block.CELLSIZE;
+						projectile = new Projectile(0, 0, 0);
+
 					}
 					if(temp[i].equals("G")) {
 						Grass newGrass = new Grass();
@@ -89,17 +106,17 @@ public class FProjMain extends JPanel {
 			System.out.println("config.txt cannot be found. Please add config.txt to the list and try again.");
 		}
 	}
-	
+
 	public void loadLegend() {
 		try {
 			FileReader reader = new FileReader("legend.txt");
 			Scanner in = new Scanner(reader);
 			String delimiter = ", ";
 			String[] temp = null;
-			
+
 			char roomKey = 0;
 			String roomName = null;
-			
+
 			while(in.hasNextLine()) {
 				String line = in.nextLine();
 				temp = line.split(delimiter);
@@ -123,29 +140,39 @@ public class FProjMain extends JPanel {
 		return blocks;
 	}
 
-	
-//	public static void main(String[] args) {
-//		FProjMain newProj = new FProjMain();
-//		System.out.println("Size of blocks array: " + newProj.blocks.size());
-//		for(Block block : newProj.blocks)
-//			System.out.println("Block name: " + newProj.legend.get(block.charName) + " --- " + "Column: " + block.getCol() + " Row: " + block.getRow());
-//
-//	}
-	
+	public void fly() {
+		launcher.changeLauncher(12, 12);
+		projectile = launcher.throwProjectile();
+		timer.start();
+		if(projectile.getY() <= 0){
+			projectile.landed = true;
+			timer.stop();
+		}
+	}
+
+	//	public static void main(String[] args) {
+	//		FProjMain newProj = new FProjMain();
+	//		System.out.println("Size of blocks array: " + newProj.blocks.size());
+	//		for(Block block : newProj.blocks)
+	//			System.out.println("Block name: " + newProj.legend.get(block.charName) + " --- " + "Column: " + block.getCol() + " Row: " + block.getRow());
+	//
+	//	}
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
-		// how to break castle
-		System.out.println(blocks.get(366).isCastleBlock());
-		Block temp = new Air();
-		temp.col = 25;
-		temp.row = 11;
-		//temp.charName = 'G';
-		blocks.set(366, temp);
-		/////////////////
+
+		//		// how to break castle
+		//		System.out.println(blocks.get(366).isCastleBlock());
+		//		Block temp = new Air();
+		//		temp.col = 25;
+		//		temp.row = 11;
+		//		//temp.charName = 'G';
+		//		blocks.set(366, temp);
+		//		/////////////////
 		for(Block blo : blocks) {
 			blo.draw(g);
 		}
+		projectile.draw(g);
 	}
 
 }

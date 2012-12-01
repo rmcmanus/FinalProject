@@ -92,7 +92,7 @@ public class TacoLauncherTest {
 		System.out.println("Got here " + testProjectile2.getY());
 		while(testProjectile2.getY()>0){
 			//Wait while projectile is falling
-			testProjectile2.setTimer(true);
+			//testProjectile2.setTimer(true);
 			System.out.println("waiting...");
 		}
 		System.out.println("Landed " + testProjectile2.getY());

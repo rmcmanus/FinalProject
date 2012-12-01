@@ -1,5 +1,6 @@
 package FProj;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,67 +14,38 @@ public class Projectile {
 	private double dx;
 	private double dy;
 	private double angle;
-	private int initialX=10;
-	private int initialY=10;
+	public static int initialX;
+	public static int initialY;
 	//private int cannonLength=5;
 	boolean landed;
-	Timer timer;
-	
 
-	
-	
-	public Projectile(double initDx, double initDy, double angle) {
-		this.dx = initDx;
-		this.dy = initDy;
+	public Projectile(double dx, double dy, double angle) {
+		this.dx = dx;
+		this.dy = dy;
 		
 		this.angle = angle;
 		
 		this.x = (int) (initialX);
 		this.y = (int) (initialY);
-		
-		timer = new Timer(100, (new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				calcStep();
-			}
-		}
-		));
-		
-	}
-	
-	public void setTimer(boolean startStop){
-		if(timer.isRunning()==true && startStop==false){
-			timer.stop();
-		}else if(timer.isRunning()==false && startStop == true){
-			timer.start();
-		}
-	}
-
-	public void stepTimer(int steps){
-		for(int i=0; i<steps; i++){
-			calcStep();
-		}
 	}
 	
 	public enum Taco {TACO, CHULUPA, DORITOSLOCOS, CANTINABOWL, STEAKQUESADILLA};
 	private Taco projectileType;
 	
 	public void draw(Graphics g) {
-		
+		g.setColor(Color.RED);
+		g.fillOval(this.x, this.y, 25, 25);
 	}
 	
 	//Updates the coordinates of the projectile in accordance with accelerations
 	public void calcStep() {
 		x += dx;
 		y += dy;
-		if(y<=0){
-			landed = true;
-			timer.stop();
-		}
-	
-		
 		dy -= 1;
 	}
+	
+	
+	//////////////
 	
 	public boolean isLanded(){
 		return landed;
@@ -111,6 +83,17 @@ public class Projectile {
 		this.dy = dy;
 	}
 	
-	
+	/*public void setTimer(boolean startStop){
+		if(timer.isRunning()==true && startStop==false){
+			timer.stop();
+		}else if(timer.isRunning()==false && startStop == true){
+			timer.start();
+		}
+	}*/
 
+	public void stepTimer(int steps){
+		for(int i=0; i<steps; i++){
+			calcStep();
+		}
+	}
 }
