@@ -48,9 +48,8 @@ public class LauncherPanel extends JPanel{
 		panel.add(angle);
 		
 		JButton setButton = new JButton("Calculate Trajectory");
+		setButton.addActionListener(new ChangeListener());
 		panel.add(setButton);
-		
-		
 		
 		return panel;
 	}
@@ -90,12 +89,34 @@ public class LauncherPanel extends JPanel{
 		public void actionPerformed(ActionEvent e) {
 			//System.out.println("Button Works");
 			//Launch!
-			if(Double.parseDouble(velocity.getText()) < 5) {
-				messageField.setText("SLOW");
-			}
-			else {
-				messageField.setText("SLOW THE HECK DOWN");
-			}
+			
+			String speedString = "";
+			double velOutput = Double.parseDouble(velocity.getText());
+			
+			if(velOutput <= 1)
+				speedString = "as slow as a Tortoise!";
+			else if(velOutput > 1 && velOutput <= 7)
+				speedString = "the same speed as a Black Mamba slithers! SSSSSSSS!";
+			else if(velOutput > 7 && velOutput <= 17)
+				speedString = "the same speed as a human being runs! I dare you to run into a castle!";
+			else if(velOutput > 17 && velOutput <=24)
+				speedString = "as fast as an unladen swallow. What do you mean, African or European?";
+			else if(velOutput > 24 && velOutput <= 30)
+				speedString = "as fast as a cottontail! And they say the tortoise always wins.";
+			else if(velOutput > 30 && velOutput <= 40)
+				speedString = "the same speed as a track dog runs!";
+			else if(velOutput > 40 && velOutput <= 50)
+				speedString = "the same speed as a gazelle! Watch out for that lion!";
+			else if(velOutput > 50 && velOutput <= 75)
+				speedString = "the same speed as a cheetah! Cheetah's are some of the world's fastest land runners!";
+			else if(velOutput > 75 && velOutput <= 260)
+				speedString = "the same speed as a peregrin falcon dives! That's CRAZY fast!";
+			else if(velOutput > 260 && velOutput <= 760)
+				speedString = "the same speed as modern landspeed records! Slow it down!";
+			else
+				speedString = "faster than the speed of sound! That's insane!";
+
+			messageField.setText("You threw that taco " + speedString + " Nice going!");
 			FProjMain.getMain().fly();
 		}
 	}

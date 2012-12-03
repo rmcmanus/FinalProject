@@ -20,8 +20,10 @@ public class FProjMain extends JPanel {
 	Map<Character, String> legend = new TreeMap<Character, String>();
 	Projectile projectile;
 	TacoLauncher launcher;
+	Trajectory trajectory;
 	int numRows = 0, numCols=0;
 	public static FProjMain globalMain;
+	int castleBlockCounter = 0;
 
 	Timer timer = new Timer(30, (new ActionListener() {
 		@Override
@@ -29,15 +31,9 @@ public class FProjMain extends JPanel {
 			projectile.calcStep();
 			collide(projectile);
 			repaint();
-			if(projectile.getY() >= (numRows - 2) * Block.CELLSIZE) {
+			if((projectile.getY() >= (numRows - 1.5) * Block.CELLSIZE) || (projectile.getX() > (numCols + 1) * Block.CELLSIZE)) {
+				projectile = new Projectile(0, 0, 0);
 				timer.stop();
-				/*projectile = new Projectile(0, 0, 0);
-				try {
-					Thread.sleep(200);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}*/
 			}
 		}
 	}
@@ -45,7 +41,7 @@ public class FProjMain extends JPanel {
 	
 	public FProjMain() {
 		loadLegend();
-		loadMapFromFile();/*yes!*/
+		loadMapFromFile();
 		globalMain = this;
 	}
 	
@@ -58,6 +54,7 @@ public class FProjMain extends JPanel {
 		int y = p.getY()/25;
 		if(y > 0) {
 			if(blocks.get(getIndex(x,y)).isCastleBlock()){
+				castleBlockCounter--;
 				Block temp = new Air();
 				temp.col = x;
 				temp.row = y;
@@ -65,6 +62,8 @@ public class FProjMain extends JPanel {
 				blocks.set(tempIndex, temp);
 				timer.stop();
 				//Readjust projectile back to launcher
+				projectile = new Projectile(0, 0, 0);
+				timer.stop();
 			}
 		}
 		else {
@@ -95,6 +94,7 @@ public class FProjMain extends JPanel {
 						blocks.add(newCloud);
 					}
 					if(temp[i].equals("B")) {
+						castleBlockCounter++;
 						Castle newCastle = new Castle();
 						newCastle.col = i;
 						newCastle.row = numRows;
@@ -110,6 +110,7 @@ public class FProjMain extends JPanel {
 						Projectile.initialX = i * Block.CELLSIZE;
 						Projectile.initialY = numRows * Block.CELLSIZE;
 						projectile = new Projectile(0, 0, 0);
+						trajectory = new Trajectory();
 
 					}
 					if(temp[i].equals("G")) {
@@ -173,41 +174,14 @@ public class FProjMain extends JPanel {
 		timer.start();
 	}
 
-	//	public static void main(String[] args) {
-	//		FProjMain newProj = new FProjMain();
-	//		System.out.println("Size of blocks array: " + newProj.blocks.size());
-	//		for(Block block : newProj.blocks)
-	//			System.out.println("Block name: " + newProj.legend.get(block.charName) + " --- " + "Column: " + block.getCol() + " Row: " + block.getRow());
-	//
-	//	}
-
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
-		//		// how to break castle
-		//		System.out.println(blocks.get(366).isCastleBlock());
-		//		Block temp = new Air();
-		//		temp.col = 25;
-		//		temp.row = 11;
-		//		//temp.charName = 'G';
-		//		blocks.set(366, temp);
-		//		/////////////////
 		for(Block blo : blocks) {
 			blo.draw(g);
 		}
-		if(!timer.isRunning()) {
-			drawTrajectory(g);
-		}
+		if(!timer.isRunning())
+			trajectory.draw(g);
 		projectile.draw(g);
-	}
-
-	public void drawTrajectory(Graphics g) {
-		for(int i = 0; i < 5; i++) {
-			projectile.calcTrajectory();
-			g.setColor(Color.WHITE);
-			g.fillOval(projectile.trajX, projectile.trajY, Block.CELLSIZE, Block.CELLSIZE);
-		}
-		
 	}
 
 }

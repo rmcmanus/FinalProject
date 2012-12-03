@@ -25,7 +25,7 @@ public class ProjectileGUI extends JFrame{
 		setJMenuBar(menuBar);
 		menuBar.add(createFileMenu());
 		
-		setSize(new Dimension(800, 600));
+		setSize(new Dimension(775, 600));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Projectile Game");
 	}
