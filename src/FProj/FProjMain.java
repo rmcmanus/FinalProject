@@ -179,7 +179,7 @@ public class FProjMain extends JPanel {
 		for(Block blo : blocks) {
 			blo.draw(g);
 		}
-		if(!timer.isRunning())
+		if(!timer.isRunning() && TacoLauncher.velocity > 0 && TacoLauncher.angle > 0)
 			trajectory.draw(g);
 		projectile.draw(g);
 	}

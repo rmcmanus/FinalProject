@@ -14,7 +14,7 @@ public class Trajectory {
 		dy = (Math.sin(Math.toRadians(-1 * TacoLauncher.getLauncher().getAngle())) * TacoLauncher.getLauncher().getVelocity());
 		dx = 0;
 		dx = (Math.cos(Math.toRadians(-1 * TacoLauncher.getLauncher().getAngle())) * TacoLauncher.getLauncher().getVelocity());
-		
+
 		calcTrajectory();
 	}
 	
